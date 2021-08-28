@@ -1,13 +1,11 @@
-
-
+import Home from "./components/Home"
 
 export const routes = [
-  // {
-  //   path: "/profile",
-  //   name: "Profile",
-  //   component: Profile,
-  //   layout: "admin"
-  // },
+  {
+    path: "/home",
+    name: "Home",
+    component: Home,
+  },
 ]
 
 

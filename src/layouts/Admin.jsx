@@ -10,7 +10,7 @@ const Admin = ({history, state}) => {
     return routes.map((prop, key) => {
         return (
           <Route
-            path={prop.layout + prop.path}
+            path={prop.path}
             render={props => (
               <prop.component
                 {...props}
@@ -26,7 +26,7 @@ const Admin = ({history, state}) => {
       <Switch >
         {getRoutes(routes)}
         <Route path="/">
-          <Redirect to="/" />
+          <Redirect to="/home" />
         </Route>
       </Switch>
     );

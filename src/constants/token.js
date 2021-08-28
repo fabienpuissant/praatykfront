@@ -1,1 +1,2 @@
-export const ACCESS_TOKEN = "access_token"
+export const ACCESS_TOKEN = "praatyk_token"
+export const tokenValue = "CB547BFE10C1EA540F432AA04621478E467691AC4DE81A29E5E7643A1A5249E2"

@@ -1,27 +1,30 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ProtectedRoute from "./routes/ProtectedRoute"
-import { ACCESS_TOKEN } from "./constants/token";
-import setAuthorizationToken from "./constants/authorizationHeader";
-import jwt from "jsonwebtoken";
-import Connexion from "./views/Connexion"
+import { ACCESS_TOKEN, tokenValue } from "./constants/token";
+import InProgressPage from "./views/InProgressPage"
 import Admin from './layouts/Admin';
 import store from './redux/store';
 import { connect } from "react-redux"
 import { setCurrentUser } from "./redux/Auth/action-creators" 
-
+import "./App.css"
 
 class App extends Component {
    
     componentWillMount() {
         if (localStorage[ACCESS_TOKEN]) {
-            const data = jwt.decode(localStorage[ACCESS_TOKEN])
-            if (data.exp > Math.round((new Date()).getTime() / 1000)) {
-                setAuthorizationToken(localStorage[ACCESS_TOKEN]);
-                store.dispatch(setCurrentUser(data))
+            // const data = jwt.decode(localStorage[ACCESS_TOKEN])
+            // if (data.exp > Math.round((new Date()).getTime() / 1000)) {
+            //     setAuthorizationToken(localStorage[ACCESS_TOKEN]);
+            //     store.dispatch(setCurrentUser(data))
 
-            } else {
-                localStorage.removeItem(ACCESS_TOKEN)
+            // } else {
+            //     localStorage.removeItem(ACCESS_TOKEN)
+            // }
+            if(localStorage[ACCESS_TOKEN] === tokenValue){
+                store.dispatch(setCurrentUser({
+                    user: "admin"
+                }))
             }
         } 
     }
@@ -30,7 +33,7 @@ class App extends Component {
         return (
             <BrowserRouter>
                 <Switch>
-                    <Route path="/signIn" component={Connexion} />
+                    <Route path="/about" component={InProgressPage} />
                     <ProtectedRoute component={Admin} />
                 </Switch>
             </BrowserRouter>
